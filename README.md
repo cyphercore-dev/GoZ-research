@@ -6,7 +6,9 @@
 - [AMA](https://www.youtube.com/watch?v=_uEu1Yfd2sY)
 
 ## Resources
-- [IBC demo](https://github.com/cosmos/relayer?utm_content=buffer47b03&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer#demoing-the-relayer)
+- [IBC Specs](https://github.com/cosmos/ics)
+- [Gaia](https://github.com/cosmos/gaia/tree/ibc-alpha)
+- [Relayer](https://github.com/iqlusioninc/relayer)
 - [IBC Video Demo](https://youtu.be/S6DKib4jINk)
 - [Cosmos SDK Docs](https://docs.cosmos.network/)
 - [Tendermint Docs](https://docs.tendermint.com/)
