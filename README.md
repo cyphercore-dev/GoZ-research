@@ -5,6 +5,9 @@
 - [Updates](https://goz.cosmosnetwork.dev/blog-2/)
 - [AMA](https://www.youtube.com/watch?v=_uEu1Yfd2sY)
 
+## Instructions
+Click [here](https://www.notion.so/jim380/GoZ-petomhub-c197bae889f64e189dfc1f7e6c93506e)
+
 ## Resources
 - [IBC Specs](https://github.com/cosmos/ics)
 - [Gaia](https://github.com/cosmos/gaia/tree/ibc-alpha)
