@@ -1,6 +1,7 @@
 # GoZ Research
 
 ## Important Links
+- [Official GoZ Repo](https://github.com/cosmosdevs/GameOfZones)
 - [Scope](https://goz.cosmosnetwork.dev/)
 - [Updates](https://goz.cosmosnetwork.dev/blog-2/)
 - [AMA](https://www.youtube.com/watch?v=_uEu1Yfd2sY)
