@@ -7,6 +7,7 @@
 3. User receives PAW from the `petomhub`, exchanged at the spot price of ATOM/PAW fed from an oracle
 
 ## Task List
+### General
 - [x] Spin up the `petomhub`
 - [x] Set up a relayer between a custom chain (e.g. Gaia) and the `petomhub`
 - [ ] Connect the two chains (in progress)
@@ -14,6 +15,15 @@
 - [ ] Test packet connections
 - [ ] Test packet relay
 - [ ] More
+
+### Infrastructure
+- [ ] Audit with Lynis (in progress)
+- [ ] Whitelist `35.230.14.56`, `34.82.233.123` and `34.83.182.199` for port `26657`
+
+## Key Points
+- Chain restart due to any reason (e.g. software crash, lack of funds) would be considered a fail. This is because the relayer light client wouldn't sync anymore if the chain went down.
+- It's recommended to run multiple relayers to maximize connection counts, BUT this also increases your chances of losing points due to relayers going down.
+- If the zone you were connected went down, you'd need to delete the old light client you created for that chain and initiate a new one.
 
 ## Weekly Challenges
 - Week 1 - Pushes the limits of packet connections by maintaining the longest lived connection with the fewest packets sent
