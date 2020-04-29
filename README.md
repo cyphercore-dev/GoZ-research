@@ -1,5 +1,11 @@
 # GoZ Research
 
+## Architecture Overview
+![petom-IBC](petom-IBC.png)
+1. User deposits ATOM from the `cosmoshub` into the `petomhub` via IBC.
+2. User locks up ATOM as collateral on the `petomhub`.
+3. User receives PAW from the `petomhub`, exchanged at the spot price of ATOM/PAW fed from an oracle.
+
 ## Important Links
 - [Official GoZ Repo](https://github.com/cosmosdevs/GameOfZones)
 - [Scope](https://goz.cosmosnetwork.dev/)
