@@ -2,10 +2,36 @@
 
 ## Architecture Overview
 ![petom-IBC](petom-IBC.png)
-1. User deposits ATOM from the `cosmoshub` into the `petomhub` via IBC.
-2. User locks up ATOM as collateral on the `petomhub`.
-3. User receives PAW from the `petomhub`, exchanged at the spot price of ATOM/PAW fed from an oracle.
+1. User deposits ATOM from the `cosmoshub` into the `petomhub` via IBC
+2. User locks up ATOM as collateral on the `petomhub`
+3. User receives PAW from the `petomhub`, exchanged at the spot price of ATOM/PAW fed from an oracle
 
+## Task List
+- [x] Spin up the `petomhub`
+- [x] Set up a relayer between a custom chain (e.g. Gaia) and the `petomhub`
+- [ ] Connect the two chains (in progress)
+- [ ] Transfer tokens back and forth between the two chains
+- [ ] Test packet connections
+- [ ] Test packet relay
+- [ ] More
+
+## Weekly Challenges
+- Week 1 - Pushes the limits of packet connections by maintaining the longest lived connection with the fewest packets sent
+- Week 2 - Relay as many packets as possible with its relayer key
+- Week 3 - Execute the best confusion or deception attacks against other zones
+
+## Cumulative Contest Challenge Rewards
+- Most Packets Relayed via IBC module
+  - the team that invests in automation to relay more packets than any other team throughout the entire competition
+- Best Custom Zone
+  - the team that invests beta tests their custom zone designed to be part of the network when IBC is production-ready
+- Most Creative Zone
+  - the team with the most creative use for IBC-generated tokens used in novel ways
+- Most Innovative/Deceptive State Machine
+  - the team who pulls off the best deception attacks by configuring their state machine in ways that give them significant benefits throughout the competition
+- The Gaia Award
+  - the team that creates the best content and technical write ups that share best practices and document novel implementations for the community throughout the competition
+  
 ## Important Links
 - [Official GoZ Repo](https://github.com/cosmosdevs/GameOfZones)
 - [Scope](https://goz.cosmosnetwork.dev/)
