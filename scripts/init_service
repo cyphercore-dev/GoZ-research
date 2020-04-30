@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ ! $1 ]]; then
+  echo "Provide connection name!"
+  echo "Run ./init_service [connection_name] [tranfer_path]"
+  exit 1
+fi
+
+if [[ ! $2 ]]; then
+  echo "Provide transfer-path name!"
+  echo "Run ./init_service [connection_name] [tranfer_path]"
+  exit 1
+fi
+
+cat <<HERE > /lib/systemd/system/$1.service
+[Unit]
+Description=Relay $1
+After=network-online.target
+
+[Service]
+User=dev
+ExecStart=/home/dev/go_workspace/bin/rly st $2
+Restart=always
+RestartSec=3
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target
+HERE
+
+systemctl enable $1
+systemctl daemon-reload
+systemctl start $1
