@@ -2,13 +2,13 @@
 
 if [[ ! $1 ]]; then
   echo "Provide connection name!"
-  echo "Run ./init_service [connection_name] [tranfer_path]"
+  echo "Run ./init_service [connection_name] [transfer_path]"
   exit 1
 fi
 
 if [[ ! $2 ]]; then
-  echo "Provide transfer-path name!"
-  echo "Run ./init_service [connection_name] [tranfer_path]"
+  echo "Provide transfer path!"
+  echo "Run ./init_service [connection_name] [transfer_path]"
   exit 1
 fi
 
