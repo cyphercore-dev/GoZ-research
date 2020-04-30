@@ -8,17 +8,18 @@
 
 ## Task List
 ### General
-- [x] Spin up the `petomhub`
-- [x] Set up a relayer between a custom chain (e.g. Gaia) and the `petomhub`
-- [ ] Connect the two chains (in progress)
-- [ ] Transfer tokens back and forth between the two chains
+- [x] Spin up the `petomhub` (using gaia for now)
+- [x] Set up a relayer between another chain (e.g. Gaia) and the `petomhub`
+- [x] Connect the two chains
+- [x] Transfer tokens back and forth between the two chains
+- [ ] Automate the process of establishing new connections (in progress)
 - [ ] Test packet connections
 - [ ] Test packet relay
 - [ ] More
 
 ### Infrastructure
 - [ ] Audit with Lynis (in progress)
-- [ ] Whitelist `35.230.14.56`, `34.82.233.123` and `34.83.182.199` for port `26657`
+- [x] Whitelist `35.230.14.56`, `34.82.233.123` and `34.83.182.199` for port `26657`
 
 ## Key Points
 - Chain restart due to any reason (e.g. software crash, lack of funds) would be considered a fail. This is because the relayer light client wouldn't sync anymore if the chain went down.
