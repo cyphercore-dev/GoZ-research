@@ -7,7 +7,7 @@
 3. User receives PAW from the `petomhub`, exchanged at the spot price of ATOM/PAW fed from an oracle
 
 ## Four Primitives
-- **Clients**: an instance of a lite client for another chain that is committed to state. Clients allow you to validate any data you are committing to your chain from the counterparty chain that has the lite client. All other primitives rely on clients to prove their data was included in the counterparty chain. The clients on each chain need to be updated at least once every unbonding period (~3 weeks), or we could no longer trust it
+- **Clients**: an instance of a lite client for another chain that is committed to state. Clients allow you to validate any data you are committing to your chain from the counterparty chain that has the lite client. All other primitives rely on clients to prove their data was included in the counterparty chain. The clients on each chain need to be updated at least once every unbonding/trusting period (21 days on mainnet, 330h default in GoZ), or we could no longer trust it
 
 - **Connections**: connections authenticate one chain with another chain in a 4-step handshake (2 on each chain). The clients need to be updated throughout the connections when kept alive to prove the newly committed state on both chains
 
@@ -45,6 +45,15 @@
 - **Chain restart due to any reason (e.g. software crash, lack of funds) would be considered a fail**. This is because the relayer light client wouldn't sync anymore if the chain went down.
 - It's recommended to **run multiple relayers to maximize connection counts**, BUT this also increases your chances of losing points due to relayers going down.
 - **If the zone you were connected went down, you'd need to delete the old light client you created for that chain and initiate a new one**.
+
+## Potential Attack Vectors
+- **Trusting period attack**. Set a relatively short `"trusting-period"` to force the counterparty chain to update their lite client as often as you do. If they failed to update their client in time, it would hurt their uptime. Or worse, they'd also have to create new a client and other primitives (e.g. connections, channels etc.) if that happened
+- **Faucet heist attack**. Empty out a chain's faucet. This will essentially stop other chains who request tokens from the faucet getting an adequate amount of tokens into their accounts on the relayer
+- **Misc.** Proposer priority attacks, double spending attacks, unnoticed equivocations, and other confusion attacks that attempt to disrupt communication and operations between zones and relayers
+
+<br />*The following attacks require you to 1) have access to the genesis of a given chain; 2) acquire enough token to become a validator on that chain*
+- **Network takeover attack**. DoS the validator(s) on a chain (e.g. `:26657` if it's open) to get them dropped from the active set and jailed. Once you control >1/3 of the network's stake, nobody else can join the active set afterwards
+- **State bloat attack**. Increase `KeyMaxEntries` in `config.tmol` dratically (say 10X) to increase the state space on a node. This will lead to slow computation and decreased IO performance, hence a slower blockchain. Ultimately some validators may run out of space, or at least see increased server cost
 
 ## Weekly Challenges
 - Week 1 - Pushes the limits of packet connections by maintaining the longest lived connection with the fewest packets sent
