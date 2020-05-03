@@ -4,47 +4,86 @@ const util = require('util');
 // Configure your chains, and client
 const config = {
   src: {
-    chain: 'ibc0',
-    client: 'ibconeclient',
+    chain: 'petomhub',
+    client: 'gsiyurrfit',
   },
-  dest: {
-    chain: 'ibc1',
+  dst: {
+    chain: 'gameofzoneshub-1a',
+    client: 'wtzweupvtn'
   },
-  interval: 10
+  interval: 1800,
+  receivers: [
+    "+14154700506",
+//    "+15416027710"
+  ]
 };
 
-const cmd = `rly tx raw update-client ${config.src.chain} ${config.dest.chain} ${config.src.client}`;
+const srcCmd = `rly tx raw update-client ${config.src.chain} ${config.dst.chain} ${config.src.client}`;
+const dstCmd = `rly tx raw update-client ${config.dst.chain} ${config.src.chain} ${config.dst.client}`;
 
-function run() {
+console.log(srcCmd, dstCmd)
+
+const runExec = (cmd) => (new Promise((resolve) => {
   exec(cmd, (err, stdout, stderr) => {
-    if (err) {
-      console.error(err);
-      return;
+    if(err) {
+      resolve({
+        error: err
+      })
+    } else if(stderr) {
+        resolve({
+          error: stderr
+        })
+    } else {
+      resolve({
+        error: undefined,
+        result: JSON.parse(stdout)
+      });
     }
-    let result = JSON.parse(stdout);
-    // Log the result to console
-    console.log(
-      util.inspect(
-        result,
-        {showHidden: false, depth: null}
-      )
-    );
+  });
+}));
+
+async function main() {
+  let srcExec = await runExec(srcCmd);
+  let dstExec = await runExec(dstCmd);
   
-    let message = `Success! Client ${config.src.client} for connection ${config.src.chain}-${config.dest.chain} updated at ${result.height}! TxHash: ${result.txhash}`; 
-    if(result.code) {
-      message = `WARNING! Client ${config.src.client} for connection ${config.src.chain}-${config.dest.chain} failed to update!`; 
-    }
-    exec(`./notify "${message}"`, (err, stdout, stderr) => {
+  // Log results
+  console.log(
+    "Source Chain Update Client Results",
+    util.inspect(
+      srcExec,
+      {showHidden: false, depth: null}
+    )
+  );
+  console.log(
+    "Destination Chain Update Client Results",
+    util.inspect(
+      dstExec,
+      {showHidden: false, depth: null}
+    )
+  );
+
+
+  let message = `SUCCESS! Client ${config.src.chain}-${config.dst.chain} updated!`; 
+  if(srcExec.error || dstExec.error) {
+    message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
+  }
+
+  if(srcExec.result.code || dstExex.result.code) {
+    message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
+  }
+
+  config.receivers.forEach(number => {
+    exec(`./notify "${message}" "${number}"`, (err, stdout, stderr) => {
       if(err) {
         console.log(err);
         return
       }
-      console.log(stdout, stderr);
+      console.log(`Text message to ${number} successfully sent!`);
     });
-  });
+  })
+
 }
 
-setInterval(run, config.interval * 1000);
+main();
 
-
-
+setInterval(run, config.interval * 1800);
