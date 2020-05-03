@@ -1,0 +1,7 @@
+{
+  "name": "ibc-scheduler",
+  "description": "Automation of some IBC task",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
