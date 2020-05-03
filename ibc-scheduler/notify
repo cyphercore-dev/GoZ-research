@@ -1,0 +1,13 @@
+#!/bin/bash
+
+account_sid="AC1d351036a4f8d864bdb351977d910b4f"
+auth_token="66099ea100cb6bf049ec5cc96b932862"
+from_number="+19382010380"
+to_number="+4154700506"
+
+
+
+curl -X POST -d "Body=$1" \
+    -d "From=${from_number}" -d "To=${to_number}" \
+    "https://api.twilio.com/2010-04-01/Accounts/${account_sid}/Messages" \
+    -u "${account_sid}:${auth_token}"

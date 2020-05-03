@@ -21,12 +21,26 @@ function run() {
       console.error(err);
       return;
     }
+    let result = JSON.parse(stdout);
+    // Log the result to console
     console.log(
       util.inspect(
-        JSON.parse(stdout), 
+        result,
         {showHidden: false, depth: null}
       )
     );
+  
+    let message = `Success! Client ${config.src.client} for connection ${config.src.chain}-${config.dest.chain} updated at ${result.height}! TxHash: ${result.txhash}`; 
+    if(result.code) {
+      message = `WARNING! Client ${config.src.client} for connection ${config.src.chain}-${config.dest.chain} failed to update!`; 
+    }
+    exec(`./notify "${message}"`, (err, stdout, stderr) => {
+      if(err) {
+        console.log(err);
+        return
+      }
+      console.log(stdout, stderr);
+    });
   });
 }
 
