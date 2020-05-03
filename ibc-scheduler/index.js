@@ -83,7 +83,5 @@ async function main() {
   })
 
 }
-
 main();
-
-setInterval(run, config.interval * 1800);
+//setInterval(main, config.interval * 1000);
