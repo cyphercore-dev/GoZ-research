@@ -5,16 +5,16 @@ const util = require('util');
 const config = {
   src: {
     chain: 'petomhub',
-    client: 'gsiyurrfit',
+    client: 'uspmcmbnwz',
   },
   dst: {
     chain: 'gameofzoneshub-1a',
-    client: 'wtzweupvtn'
+    client: 'hiaymvnsld'
   },
   interval: 1800,
   receivers: [
     "+14154700506",
-//    "+15416027710"
+    "+15416027710"
   ]
 };
 
@@ -68,7 +68,7 @@ async function main() {
     message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
   }
 
-  if(srcExec.result.code || dstExex.result.code) {
+  if(srcExec.result.code || dstExec.result.code) {
     message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
   }
 
@@ -83,5 +83,9 @@ async function main() {
   })
 
 }
-main();
-//setInterval(main, config.interval * 1000);
+
+// Testing
+//main();
+
+// Running
+setInterval(main, config.interval * 1000);
