@@ -5,11 +5,11 @@ const util = require('util');
 const config = {
   src: {
     chain: 'petomhub',
-    client: 'uspmcmbnwz',
+    client: 'rploripajs',
   },
   dst: {
     chain: 'gameofzoneshub-1a',
-    client: 'hiaymvnsld'
+    client: 'hfjxdtpfjh'
   },
   interval: 1800,
   receivers: [
@@ -27,17 +27,33 @@ const runExec = (cmd) => (new Promise((resolve) => {
   exec(cmd, (err, stdout, stderr) => {
     if(err) {
       resolve({
-        error: err
+        error: err,
+        result: {
+          code: '-1'
+        }
       })
     } else if(stderr) {
         resolve({
-          error: stderr
+          error: stderr,
+          result: {
+            code: '-2'
+          }
         })
     } else {
-      resolve({
-        error: undefined,
-        result: JSON.parse(stdout)
-      });
+      try {
+        let json = JSON.parse(stdout)
+        resolve({
+          error: undefined,
+          result: json
+        });
+      } catch(err) {
+        resolve({
+          error: err,
+          result: {
+            code: '-3'
+          }
+        })
+      }
     }
   });
 }));
@@ -64,12 +80,17 @@ async function main() {
 
 
   let message = `SUCCESS! Client ${config.src.chain}-${config.dst.chain} updated!`; 
+  let restart = false;
   if(srcExec.error || dstExec.error) {
+    restart = true;
+    message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
+  } else if(srcExec.result.code || dstExec.result.code) {
+    restart = true;
     message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
   }
 
-  if(srcExec.result.code || dstExec.result.code) {
-    message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
+  if(restart) {
+    setTimeout(main, 5000);
   }
 
   config.receivers.forEach(number => {
