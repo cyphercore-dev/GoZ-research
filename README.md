@@ -25,8 +25,8 @@
 - [ ] Establish connection with multiple chains in the custom `petomhub`
 - [x] Transfer tokens back and forth with other chains in the gaia-based`petomhub`
 - [ ] Transfer tokens back and forth with other chains in the custom `petomhub`
-- [ ] Automate the process of establishing new connections (needs testing)
-- [ ] Automate sending packets from the relayer at least once every 90 min
+- [x] Automate the process of establishing new connections (needs testing)
+- [x] Automate sending packets from the relayer at least once every 90 min
 - [ ] More
 
 ### Infrastructure
