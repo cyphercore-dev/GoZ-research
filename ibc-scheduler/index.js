@@ -4,12 +4,12 @@ const util = require('util');
 // Configure your chains, and client
 const config = {
   src: {
-    chain: 'petomhub',
-    client: 'qkxclsstdj',
+    chain: '',
+    client: '',
   },
   dst: {
-    chain: 'gameofzoneshub-1a',
-    client: 'lmrjiauuko'
+    chain: '',
+    client: ''
   },
   interval: 30,
   retry: 8, 
@@ -19,8 +19,7 @@ const config = {
   ]
 };
 
-const srcCmd = `rly tx raw update-client ${config.src.chain} ${config.dst.chain} ${config.src.client}`;
-const dstCmd = `rly tx raw update-client ${config.dst.chain} ${config.src.chain} ${config.dst.client}`;
+const command = `rly tx raw update-client ${config.src.chain} ${config.dst.chain} ${config.src.client}`;
 
 const runExec = (cmd) => (new Promise((resolve) => {
   exec(cmd, (err, stdout, stderr) => {
@@ -58,13 +57,13 @@ const runExec = (cmd) => (new Promise((resolve) => {
 }));
 
 async function main() {
-  console(`RUNNING ${srcCmd}`
-  let srcExec = await runExec(srcCmd);
+  console(`RUNNING ${command}`
+  let execResult = await runExec(command);
   
   console.log(
     "RESULT",
     util.inspect(
-      srcExec,
+      execResult,
       {showHidden: false, depth: null}
     )
   );
@@ -72,10 +71,10 @@ async function main() {
 
   let message = `SUCCESS! Client ${config.src.chain}-${config.dst.chain} updated!`; 
   let restart = false;
-  if(srcExec.error) {
+  if(execResult.error) {
     restart = true;
     message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
-  } else if(srcExec.result.code) {
+  } else if(execResult.result.code) {
     restart = true;
     message = `WARNING! Failed to update client ${config.src.chain}-${config.dst.chain}!`; 
   }
