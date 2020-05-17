@@ -12,7 +12,7 @@ const config = {
     client: 'lmrjiauuko'
   },
   interval: 30,
-  retry 8: 
+  retry: 8, 
   receivers: [
     "+14154700506",
     "+15416027710"
