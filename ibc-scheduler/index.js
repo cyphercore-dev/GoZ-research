@@ -1,25 +1,11 @@
 const { exec, spawn } = require('child_process');
 const util = require('util');
+const config = require('./config')[process.env.CHAIN]
 
-// Configure your chains, and client
-const config = {
-  src: {
-    chain: '',
-    client: '',
-  },
-  dst: {
-    chain: '',
-    client: ''
-  },
-  interval: 30,
-  retry: 8, 
-  receivers: [
-    "+14154700506",
-    "+15416027710"
-  ]
-};
+const command = `rly tx raw update-client ${config.src_name} ${config.dst_name} ${config.src_client}`;
 
-const command = `rly tx raw update-client ${config.src.chain} ${config.dst.chain} ${config.src.client}`;
+console.log(command)
+
 
 const runExec = (cmd) => (new Promise((resolve) => {
   exec(cmd, (err, stdout, stderr) => {
@@ -57,7 +43,7 @@ const runExec = (cmd) => (new Promise((resolve) => {
 }));
 
 async function main() {
-  console(`RUNNING ${command}`
+  console(`RUNNING ${command}`)
   let execResult = await runExec(command);
   
   console.log(
@@ -97,4 +83,4 @@ async function main() {
 //main();
 
 // Running
-setInterval(main, config.interval * 60 * 1000);
+//setInterval(main, config.interval * 60 * 1000);

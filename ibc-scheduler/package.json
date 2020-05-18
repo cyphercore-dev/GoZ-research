@@ -2,6 +2,7 @@
   "name": "ibc-scheduler",
   "description": "Automation of some IBC task",
   "scripts": {
-    "start": "node index.js"
+    "start:petom": "CHAIN=petomhub node index.js",
+    "start:hub": "CHAIN=gameofzones node index.js"
   }
 }

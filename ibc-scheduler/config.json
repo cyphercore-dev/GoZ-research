@@ -1,0 +1,16 @@
+{
+  "petomhub": {
+    "src_name": "petomhub-1b",
+    "src_client": "llmuiqnvzs",
+    "dst_name": "gameofzoneshub-1b",
+    "send_interval": 30,
+    "retry_interval": 8 
+  },
+  "gameofzones": {
+    "src_name": "gameofzoneshub-1b",
+    "src_client": "cxhmqonqjy",
+    "dst_name": "petomhub-1b",
+    "send_interval": 30,
+    "retry_interval": 8 
+  }
+}
